@@ -60,13 +60,14 @@ class Featurize():
     Data_Fp: pandas.DataFrame
         Data after calculating descriptors.
     """
-    def __init__(self, data, smile_col, activity_col, ID, save_dir, standardize = True):
+    def __init__(self, data, smile_col, activity_col, ID, save_dir, m2v_path, standardize = True):
         self.smile_col = smile_col
         self.activity_col = activity_col
         self.ID = ID
         self.save_dir = save_dir
         self.standardize = standardize
         self.data = data[[self.ID,self.smile_col, self.activity_col]]
+        self.m2v_path = m2v_path
         #PandasTools.AddMoleculeColumnToFrame(self.data,self.smile_col,'Molecule')
     
     # standardize molecules
@@ -281,7 +282,7 @@ class Featurize():
         # 19. Mol2vec
         self.mol2vec =self.data.copy()
         print("CALCULATING Mol2vec...")
-        model = word2vec.Word2Vec.load('model_300dim.pkl')
+        model = word2vec.Word2Vec.load(self.m2v_path)
         self.mol2vec['sentence'] = self.mol2vec.progress_apply(lambda x: MolSentence(mol2alt_sentence(x['Molecule'], 1)), axis=1)
         self.mol2vec['mol2vec'] = [DfVec(x) for x in sentences2vec(self.mol2vec['sentence'], model, unseen='UNK')]
         X = np.array([x.vec for x in self.mol2vec['mol2vec']])
