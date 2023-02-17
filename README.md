@@ -1,6 +1,10 @@
-# MolecularClustering overview
+# MolecularClustering 
 
-## Use butina algorithm to cluster molecules
+## Overview
+- Clustering molecules into differenet group based on molecular fingerpirnt and  Butina, K-means algorithms
+- To select diverse subset for pharmacophore modeling, docking retrospective control, or just select compounds for HTS
+
+### Use butina algorithm to cluster molecules
 
 ![screenshot](ScatterplotButina.png)
 
@@ -17,7 +21,22 @@ This module requires the following modules:
 - [scikit-learn](https://scikit-learn.org/stable/)
 
 ## Installation
-To do...
+Clone this repository to use
+
+## Folder segmentation
+
+Finally the folder structure should look like this:
+
+    Molph4 (project root)
+    |__  README.md
+    |__  MolecularClustering
+    |__  |__ cluster_visualize 
+    |    |__ molecules_clustering
+    |    |__ diversesubset
+    |__  utility
+    |__  HIV_integrase.csv
+    |    
+    |......
 ## Usage
 
 ```python
